@@ -18,7 +18,7 @@
 
 from typing import TypedDict
 
-import numpy as np
+import pytest
 import shapely.geometry
 
 from . import dice
@@ -63,7 +63,7 @@ def test_dice_from_polygons():
 
         returned_dice = dice.from_shapely(a, b)
 
-        assert np.abs(returned_dice - case["expected_dice"]) < 0.00001, case["label"]
+        assert returned_dice == pytest.approx(case["expected_dice"]), case["label"]
 
 
 class _TestCase(TypedDict):
